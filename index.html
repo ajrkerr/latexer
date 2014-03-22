@@ -1,0 +1,66 @@
+<html>
+<head>
+  <title>LaTexer</title>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <script type="text/javascript">
+    window.addEventListener("load", function () {
+      // Configure MathJax Queue //
+      var MJQ = MathJax.Hub.queue;
+      var texInput = document.getElementById("tex");
+      var renderEl = document.getElementById("rendered");
+
+      var math = MathJax.Hub.getAllJax("rendered")[0];
+
+      // Configure Event Listener  //
+      texInput.addEventListener("keyup", function () {
+        var formula = this.value;
+        MJQ.Push(["Text", math, "\\displaystyle{"+formula+"}"]);
+      });
+    });
+  </script>
+
+  <style>
+    body {
+      background: #AAA;
+    }
+
+    #tex {
+      font-family: helvetica, arial, sans-serif;
+      display: inline-block;
+      border: #222 1px solid;
+      border-radius: 5px;
+      padding: .5em;
+      font-size: 12pt;
+    }
+
+    #rendered {
+      font-family: helvetica, arial, sans-serif;
+      display: inline-block;
+      float: right;
+      background: #222;
+      border-radius: 5px;
+      color: white;
+      padding: .5em;
+      font-size: 12pt;
+    }
+
+    #rendered::before {
+      content: "Formula Renders Here";
+      top: 0;
+      left: 0;
+      color: rgba(255, 255, 255, .5);
+    }
+
+    .col1 {
+      width:  45%;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <textarea class="col1" id="tex" placeholder="Type Latex Formula Here"></textarea>
+  <div class="col1" id="rendered">$${}$$</div>
+</body>
+</html>
